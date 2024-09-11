@@ -29,7 +29,9 @@ pipeline {
                 script {
                     // Run tests inside the Docker container
                     docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").inside {
-                        sh 'pytest test/'
+                        dir('/flask_app'){
+				sh 'pytest test/'
+			}
                     }
                 }
             }
