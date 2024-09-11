@@ -16,7 +16,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY app/ .
 
 # Copy the test directory to the working directory
-COPY test/ ./test/
+#COPY test/ ./test/
 
 # Run the application by default
 CMD [ "python", "app.py" ]
