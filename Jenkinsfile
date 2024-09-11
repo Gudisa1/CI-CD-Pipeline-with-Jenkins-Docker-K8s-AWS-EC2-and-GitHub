@@ -29,9 +29,7 @@ pipeline {
                 script {
                     // Run tests inside the Docker container
                     docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").inside {
-                        dir('/flask_app'){
-				sh 'pytest test/'
-			}
+                        sh 'pytest test/'
                     }
                 }
             }
@@ -43,7 +41,7 @@ pipeline {
                     // Login to Docker registry
                     docker.withRegistry('https://index.docker.io/v1/', "${DOCKER_CREDENTIALS_ID}") {
                         // Push the Docker image to Docker Hub
-                        docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").push()
+                        docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").push("${DOCKER_TAG}")
                     }
                 }
             }
