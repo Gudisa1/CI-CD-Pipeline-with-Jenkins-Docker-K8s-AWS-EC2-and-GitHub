@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'my-flask-app'
-        DOCKER_TAG = 'latest'
+        DOCKER_TAG = "${env.BUILD_NUMBER}"  // Use build number as tag
         DOCKER_CREDENTIALS_ID = 'docker'
     }
 
@@ -52,6 +52,10 @@ pipeline {
         always {
             // Clean up Docker images after the build
             sh 'docker system prune -af'
+        }
+        failure {
+            // Notify on build failure (optional)
+            echo 'Build failed!'
         }
     }
 }
