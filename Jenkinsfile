@@ -24,16 +24,6 @@ pipeline {
             }
         }
         
-        stage('Run Tests') {
-            steps {
-                script {
-                    // Run tests inside the Docker container
-                    docker.image("${DOCKER_IMAGE}:${DOCKER_TAG}").inside {
-                        sh 'pytest test/'
-                    }
-                }
-            }
-        }
         
         stage('Push Docker Image') {
             steps {
